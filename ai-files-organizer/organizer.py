@@ -3,9 +3,16 @@ import json
 from openai import OpenAI
 import shutil
 
+# 初始化DeepSeek客户端
+api_key = os.getenv("DEEPSEEK_API_KEY") or os.getenv("OPENAI_API_KEY")
+base_url = os.getenv("DEEPSEEK_BASE_URL", "https://api.deepseek.com")
+
+if not api_key:
+    raise RuntimeError("缺少 API Key，请设置 DEEPSEEK_API_KEY 或 OPENAI_API_KEY 环境变量")
+
 client = OpenAI(
-    api_key="",
-    base_url="https://api.deepseek.com"
+    api_key=api_key,
+    base_url=base_url,
 )
 
 def get_files(folder):
